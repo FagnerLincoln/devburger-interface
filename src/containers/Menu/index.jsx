@@ -16,7 +16,7 @@ export function Menu() {
 
             setCategories(newCategories);
 
-            }
+        }
             
         async function loadProducts() {
             const { data } = await api.get('/products');
