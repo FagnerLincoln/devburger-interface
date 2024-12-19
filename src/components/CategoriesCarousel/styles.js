@@ -1,16 +1,26 @@
 
 
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
 
 .carousel-item {
-    padding: 20px;
+    padding: 40px;
 }
+
+.react-multiple-carousel_arrow--left{
+    left: 15px;
+    top: 10px;
+    }
+
+.react-multiple-carousel_arrow--right{
+        top: 10px;
+    }
 
 padding-left: 40px;
 
-`
+`;  
 
 export const Title = styled.h2`
 
@@ -49,14 +59,16 @@ padding: 20px 10px;
 width: 95%;
 height: 200px;
 
-p {
-    color: #fff;
-    background-color: rgba(0,0,0, 0.5);
-    padding: 10px 30px;
-    border-radius: 30px;
-    font-size: 22.5;
-    font-weight: bold;
-}
+`;
+export const CategoryButton = styled(Link)` 
+color: #fff;
+background-color: rgba(0,0,0, 0.5);
+padding: 10px 30px;
+border-radius: 30px;
+font-size: 22.5;
+font-weight: 500;
+text-decoration: none;
 
-`
+`;
+
 
