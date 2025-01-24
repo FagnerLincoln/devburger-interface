@@ -16,7 +16,7 @@ export function CartResume() {
   useEffect(() => {
     
     // Garantir que cartProducts seja sempre um array
-    const sumAllItems = (cartProducts || []).reduce((acc, current) => {
+    const sumAllItems =  cartProducts.reduce((acc, current) => {
       return current.price * current.quantity + acc;
     }, 0);
 
