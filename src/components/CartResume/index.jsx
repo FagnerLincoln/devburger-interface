@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 
-import { useCart } from "../../hooks/CartContext";
+import { useCart, } from "../../hooks/CartContext";
 import { api } from "../../services/api";
 import { formatPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import { Container } from "./styles";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export function CartResume() {
   const [finalPrice, setFinalPrice] = useState(0);
   const [deliveryTax] = useState(500);
+
+  const navigate = useNavigate();
 
   const { cartProducts, clearCart } = useCart();
 
@@ -23,6 +26,36 @@ export function CartResume() {
 
     setFinalPrice(sumAllItems);
   }, [cartProducts]);
+
+  const submitOrder = async () => {
+const products = cartProducts.map ((product)=> {
+  return {id: product.id, quantity: product.quantity};
+});
+
+try {
+  const { status } = await api.post('/orders', {products} , {
+      validateStatus: () => true,
+  });
+
+  if (status === 200 || status === 201) {
+    
+setTimeout(() => {
+Navigate('/')
+}, 2000);
+clearCart();
+
+      toast.success('Pedido Realizaso Com Sucesso!');
+  } else if (status === 400) {
+      toast.error('Falha na Realização do Pedido,')
+  } else {
+      throw new Error();
+  }
+
+} catch (error) {
+  toast.error('😪Falha no Sistema! Tente novamente.😪')
+}
+
+  }
   
   return (
     <div>
@@ -39,7 +72,7 @@ export function CartResume() {
           <p>{formatPrice(finalPrice + deliveryTax)}</p>
         </div>
       </Container>
-      <Button>Finalizar Pedido</Button>
+      <Button onClick={submitOrder}>Finalizar Pedido</Button>
     </div>
   );
 }

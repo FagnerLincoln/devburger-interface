@@ -5,9 +5,9 @@ import { Table } from '../index';
 import { ButtonGroup, EmptyCart, ProductImage, ProductTotalPrice, TrashImage,  } from './styles';
 
 export function CartItems() {
-    const { CartProducts, increaseProduct,  decreaseProduct, deleteProduct  } = useCart();
+    const { cartProducts, inCreaseProduct,  decreaseProduct, deleteProduct  } = useCart();
 
-    console.log(CartProducts)
+    console.log(cartProducts)
 
     return (
         <Table.Root>
@@ -21,8 +21,8 @@ export function CartItems() {
                     <Table.Th></Table.Th>
                 </Table.Tr>
             </Table.Header>
-            <Table.Body>{CartProducts?.length ? (
-                CartProducts.map(product => (
+            <Table.Body>{cartProducts?.length ? (
+                cartProducts.map(product => (
                     <Table.Tr key={product.id}>
                         <Table.Td>
                             <ProductImage src={product.url} />
@@ -33,7 +33,7 @@ export function CartItems() {
                             <ButtonGroup>
                                 <button onClick={() => decreaseProduct(product.id)}>-</button>
                                 {product.quantity}
-                                <button onClick={() => increaseProduct(product.id)}>+</button>
+                                <button onClick={() => inCreaseProduct(product.id)}>+</button>
                             </ButtonGroup>
                             
                         </Table.Td>
