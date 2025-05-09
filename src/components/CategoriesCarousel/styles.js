@@ -25,7 +25,7 @@ padding-left: 40px;
 export const Title = styled.h2`
 
 font-size: 34px;
-color: #9758a6;
+color: ${(props) => props.theme.purple};
 font-weight: 800;
 padding-bottom: 12px;
 position: relative;
@@ -39,7 +39,7 @@ text-align: center;
     bottom: 0;
     width: 56px;
     height: 4px;
-    background-color: #9758a6;
+    background-color: ${(props) => props.theme.purple};
     left: calc(50% - 28px);
 
 

@@ -61,13 +61,13 @@ export const CategoryButton = styled(Link)`
 text-decoration: none;
 cursor: pointer;
 background: none;
-color: ${(props) => (props.$isActiveCategory ? '#9758a6' : '#7b7672')};
+color: ${(props) => (props.$isActiveCategory ? '${(props) => props.theme.purple}' : '#7b7672')};
 font-size: 22px;
 font-weight: bold;
 padding-bottom: 5px;
 line-height: 25px;
 border: none;
-border-bottom: ${(props) => props.$isActiveCategory && '3px solid #9758a6'};
+border-bottom: ${(props) => props.$isActiveCategory && '3px solid ${(props) => props.theme.purple}'};
 
 `;
 

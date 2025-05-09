@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup"
 import { api } from '../../services/api';
-import {useUser} from '../../hooks/UserContext'
+import { useUser } from '../../hooks/UserContext'
 
 
 
@@ -26,7 +26,7 @@ import { Button } from '../../components/Button';
 
 export function Login() {
     const navigate = useNavigate();
-    const {putUserData} = useUser();
+    const { putUserData } = useUser();
 
     const schema = yup
         .object({
@@ -61,8 +61,15 @@ export function Login() {
                 pending: 'Verificando Seus Dados',
                 success: {
                     render() {
-                        setTimeout(() => { }, 2000);
-                        navigate('/');
+                        setTimeout(() => {
+                            if (userData?.admin) {
+                                navigate('/admin/pedidos');
+                            } else {
+                                navigate('/');
+                            }
+
+                        }, 2000);
+
                         return 'Seja Bem-Vindo(a) 👌'
                     }
                 },
@@ -72,7 +79,7 @@ export function Login() {
         );
 
         putUserData(userData);
-// localStorage.setItem('token', token);
+        // localStorage.setItem('token', token);
     };
 
     return (

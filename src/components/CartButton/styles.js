@@ -3,7 +3,7 @@ import styled from "styled-components";
 
             export const ContainerButton = styled.button`
             
-    background: #9758A6;
+    background: ${(props) => props.theme.purple};
     width: 100%;
     height: 53px;
     border: 0;

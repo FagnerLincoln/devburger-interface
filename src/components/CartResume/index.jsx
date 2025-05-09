@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 import { formatPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import { Container } from "./styles";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function CartResume() {
   const [finalPrice, setFinalPrice] = useState(0);
@@ -18,9 +18,9 @@ export function CartResume() {
   const { cartProducts, clearCart } = useCart();
 
   useEffect(() => {
-    
+
     // Garantir que cartProducts seja sempre um array
-    const sumAllItems =  cartProducts.reduce((acc, current) => {
+    const sumAllItems = cartProducts.reduce((acc, current) => {
       return current.price * current.quantity + acc;
     }, 0);
 
@@ -28,35 +28,35 @@ export function CartResume() {
   }, [cartProducts]);
 
   const submitOrder = async () => {
-const products = cartProducts.map ((product)=> {
-  return {id: product.id, quantity: product.quantity};
-});
+    const products = cartProducts.map((product) => {
+      return {
+        id: product.id,
+        quantity: product.quantity,
+        price: product.price,
+      };
+    });
 
-try {
-  const { status } = await api.post('/orders', {products} , {
-      validateStatus: () => true,
-  });
+    try {
+      const { data } = await api.post('/create-payment-intent', { products });
+      
+      navigate('checkout', {
+         state: data,
+      })
+    } catch (err) { 
+      toast.error('Erro, Tente novamente!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    };
 
-  if (status === 200 || status === 201) {
-    
-setTimeout(() => {
-Navigate('/')
-}, 2000);
-clearCart();
+      };
 
-      toast.success('Pedido Realizaso Com Sucesso!');
-  } else if (status === 400) {
-      toast.error('Falha na Realização do Pedido,')
-  } else {
-      throw new Error();
-  }
-
-} catch (error) {
-  toast.error('😪Falha no Sistema! Tente novamente.😪')
-}
-
-  }
-  
   return (
     <div>
       <Container>
