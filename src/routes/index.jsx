@@ -1,30 +1,57 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Route, Routes, } from "react-router-dom";
+import {
+    Cart,
+    Checkout,
+    CompletePayment,
+    Home,
+    Login,
+    Menu,
+    Register,
+    Orders,
+    NewProduct,
+    EditProduct,
+    Products
+} from "../containers/";
+import { UserLayout } from "../layouts/UserLayout";
+import { AdminLayout } from "../layouts/UserLayout/AdminLayout";
 
-import { Login } from "../containers/Login";
-import { Register } from "../containers/Register";
-import { Home } from "../containers/HOME";
-import { Menu } from "../containers/Menu";
+export function Router() {
 
+    return (
+        <Routes>
+            <Route path="/" element={<UserLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/cardapio" element={<Menu />} />
+                <Route path="/carrinho" element={<Cart />} />
+                <Route path="/Checkout" element={<Checkout />} />
+                <Route path="/complete" element={<CompletePayment />} />
+            </Route>
 
-export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Home/>,
-    },
+            <Route path="/admin" element={<AdminLayout />}>
+                <Route path="/admin/pedidos" element={<Orders />} />
+                <Route path="/admin/novo-produto" element={<NewProduct />} />
+                <Route path="/admin/editar-produto/" element={<EditProduct />} />
 
-    {
-    path: '/login',
-    element: <Login/>,
-},
+                <Route path="/admin/produtos" element={<Products />} />
+            </Route>
 
-{
-    path: '/cadastro',
-    element: <Register/>,
-},
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Register />} />
+        </Routes>
+    )
 
-{
-    path: '/cardapio',
-    element: <Menu/>,
-},
+}
+//   {
+//       path: '/carrinho/checkout',
+//       element:
+//           <Checkout />,
+//    },
+//
+//   {
+//      path: '/complete',
+//      element:
+//          <CompletePayment />,
+//   },
 
-]);
+//    ]);  
+

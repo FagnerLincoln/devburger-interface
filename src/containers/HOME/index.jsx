@@ -1,12 +1,12 @@
 
-import { CategoriesCarousel } from "../../components/CategoriesCarousel";
-import { OffersCarousel } from "../../components/OffersCarousel";
+import { OffersCarousel, CategoriesCarousel } from "../../components";
 import { Banner, Container, } from "./Styles";
 
-export function Home(){
 
-    return(
-        
+export function Home(){
+   
+    
+       return(
         <main>
             <Banner>
             <h1>Bem Vindo!(a)</h1>
